@@ -234,8 +234,21 @@ document.addEventListener('DOMContentLoaded', ()=>{
   function parseCart() {
     try { return JSON.parse(localStorage.getItem('pulsepair_cart') || '[]'); } catch (e) { return []; }
   }
+  function getCheckoutSelection() {
+    try {
+      var params = new URLSearchParams(window.location.search);
+      var buy = params.get('buy');
+      if (buy) return [{ id: buy, quantity: 1 }];
+    } catch (e) {}
+    return parseCart();
+  }
   function cartTotal(items) {
-    return items.reduce((sum, item) => sum + ((item.price || 0) * (item.quantity || 1)), 0);
+    return items.reduce(function(sum, item) {
+      var product = (typeof productById === 'function') ? productById(item.id) : null;
+      var price = product ? Number(product.price || 0) : Number(item.price || 0);
+      var qty = Number(item.quantity || 1);
+      return sum + (price * qty);
+    }, 0);
   }
   function ensureRazorpayScript() {
     return new Promise(function(resolve, reject){
@@ -257,9 +270,9 @@ document.addEventListener('DOMContentLoaded', ()=>{
     form.addEventListener('submit', async function(ev){
       ev.preventDefault();
 
-      var items = parseCart();
+      var items = getCheckoutSelection();
       if (!items.length) {
-        alert('Your cart is empty.');
+        alert('No valid product found for checkout.');
         return;
       }
 
