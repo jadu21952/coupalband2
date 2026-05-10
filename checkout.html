@@ -1,20 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
-<head><meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /><title>Checkout | PulsePair</title>
+<head><meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /><title>Secure Checkout | PulsePair</title><meta name="description" content="Secure checkout for PulsePair long-distance touch bracelets." />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css" /></head>
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+</head>
 <body>
-<header class="site-header"><div class="container nav-wrap"><a href="index.html" class="logo">PulsePair</a><nav class="main-nav"><a href="index.html#shop">Shop</a><a href="cart.html">Cart</a></nav><div class="nav-actions"><a href="cart.html" class="cart-link">Cart <span id="cartCountHeader" class="badge">0</span></a></div></div></header>
-<main class="section"><div class="container checkout-layout"><div><div class="section-head"><h1>Checkout</h1></div><form id="checkoutForm" class="checkout-form">
-<label>Full Name<input required name="name" placeholder="Your full name" /></label>
-<label>Phone Number<input required name="phone" placeholder="Mobile number" /></label>
-<label>Email<input required type="email" name="email" placeholder="Email address" /></label>
-<label>Address<textarea required name="address" placeholder="Shipping address"></textarea></label>
-<label>Payment Method<select name="payment"><option>Cash on Delivery</option><option>UPI Manual Transfer</option></select></label>
-<button class="btn btn-primary" type="submit">Place Order</button>
-<p class="tiny-note">This demo checkout stores the order locally and sends you to the success page. Real payment gateway can be added later.</p>
-</form></div><aside id="checkoutSummary" class="summary-card"></aside></div></main>
+<header class="site-header"><div class="container nav-wrap"><a href="index.html" class="logo">PulsePair</a><nav class="main-nav"><a href="index.html#shop">Shop</a><a href="index.html#how">How It Works</a><a href="index.html#faq">FAQ</a></nav><div class="nav-actions"><a href="cart.html" class="cart-link">Cart <span id="cartCountHeader" class="badge">0</span></a></div></div></header>
+<main class="section checkout-premium-section">
+  <div class="container">
+    <div class="section-head center checkout-head">
+      <p class="eyebrow">Secure Checkout</p>
+      <h1>Complete Your Order</h1>
+      <p class="section-copy">Enter your shipping details and continue to secure Razorpay payment.</p>
+    </div>
+    <div class="checkout-layout premium-checkout-layout">
+      <div class="checkout-main-card">
+        <div class="checkout-card-header"><h2>Shipping Address</h2><span class="secure-pill">100% Secure</span></div>
+        <form id="checkoutForm" class="checkout-form premium-checkout-form">
+          <div class="form-grid two-col-grid">
+            <label>Full Name<input required name="name" placeholder="Enter full name" /></label>
+            <label>Mobile Number<input required name="phone" placeholder="10-digit mobile number" inputmode="tel" /></label>
+          </div>
+          <div class="form-grid two-col-grid">
+            <label>Email Address<input required type="email" name="email" placeholder="Enter email address" /></label>
+            <label>Pincode<input required name="pincode" placeholder="6-digit pincode" inputmode="numeric" /></label>
+          </div>
+          <div class="form-grid two-col-grid">
+            <label>State<input required name="state" placeholder="State" /></label>
+            <label>City<input required name="city" placeholder="City" /></label>
+          </div>
+          <label>House No. / Building / Street<textarea required name="address" placeholder="House number, street name, area"></textarea></label>
+          <label>Landmark<input name="landmark" placeholder="Nearby landmark (optional)" /></label>
+          <label>Order Notes<input name="notes" placeholder="Anything we should know? (optional)" /></label>
+          <div class="payment-method-box">
+            <div>
+              <h3>Payment Method</h3>
+              <p>Pay securely using UPI, Cards, Netbanking, or Wallets via Razorpay.</p>
+            </div>
+            <div class="payment-method-pill">Razorpay</div>
+          </div>
+          <button class="btn btn-primary premium-pay-btn" type="submit">Proceed to Payment</button>
+          <p class="tiny-note">Test mode enabled. Razorpay test key has been configured for checkout.</p>
+        </form>
+      </div>
+      <aside id="checkoutSummary" class="summary-card premium-summary-card"></aside>
+    </div>
+  </div>
+</main>
 <script src="app.js"></script>
 </body></html>
