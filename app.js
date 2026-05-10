@@ -193,7 +193,7 @@ function renderCheckout(){
     };
     localStorage.setItem('pulsepair_last_order', JSON.stringify(order));
     if(!new URLSearchParams(location.search).get('buy')) saveCart([]);
-    location.href = 'success.html';
+    window.location.href = `success.html?order_id=${encodeURIComponent(orderId)}&payment_id=${encodeURIComponent(paymentId||'')}`;
   });
 }
 
@@ -226,3 +226,144 @@ document.addEventListener('DOMContentLoaded', ()=>{
   renderCheckout();
   renderSuccess();
 });
+
+
+
+/* Razorpay success-only checkout override */
+(function () {
+  function parseCart() {
+    try { return JSON.parse(localStorage.getItem('pulsepair_cart') || '[]'); } catch (e) { return []; }
+  }
+  function cartTotal(items) {
+    return items.reduce((sum, item) => sum + ((item.price || 0) * (item.quantity || 1)), 0);
+  }
+  function ensureRazorpayScript() {
+    return new Promise(function(resolve, reject){
+      if (window.Razorpay) return resolve();
+      var s = document.createElement('script');
+      s.src = 'https://checkout.razorpay.com/v1/checkout.js';
+      s.onload = function(){ resolve(); };
+      s.onerror = function(){ reject(new Error('Razorpay SDK failed to load')); };
+      document.head.appendChild(s);
+    });
+  }
+  function saveOrder(payload) {
+    localStorage.setItem('pulsepair_last_order', JSON.stringify(payload));
+  }
+  function initSuccessOnlyCheckout() {
+    var form = document.getElementById('checkoutForm');
+    if (!form) return;
+
+    form.addEventListener('submit', async function(ev){
+      ev.preventDefault();
+
+      var items = parseCart();
+      if (!items.length) {
+        alert('Your cart is empty.');
+        return;
+      }
+
+      var data = new FormData(form);
+      var fullName = (data.get('name') || '').toString().trim();
+      var phone = (data.get('phone') || '').toString().trim();
+      var email = (data.get('email') || '').toString().trim();
+      var pincode = (data.get('pincode') || '').toString().trim();
+      var state = (data.get('state') || '').toString().trim();
+      var city = (data.get('city') || '').toString().trim();
+      var address = (data.get('address') || '').toString().trim();
+      var landmark = (data.get('landmark') || '').toString().trim();
+      var notes = (data.get('notes') || '').toString().trim();
+
+      if (!fullName || !phone || !email || !pincode || !state || !city || !address) {
+        alert('Please fill all required checkout details.');
+        return;
+      }
+
+      var submitBtn = form.querySelector('button[type="submit"]');
+      var originalText = submitBtn ? submitBtn.textContent : 'Pay Now';
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Opening Payment...';
+      }
+
+      var amount = cartTotal(items) * 100;
+      var orderId = 'PP-' + Date.now();
+
+      try {
+        await ensureRazorpayScript();
+
+        var options = {
+          key: 'rzp_test_SmyTWYoznFPV2b',
+          amount: amount,
+          currency: 'INR',
+          name: 'PulsePair',
+          description: 'Long-Distance Touch Bracelets',
+          image: '',
+          handler: function (response) {
+            var payload = {
+              orderId: orderId,
+              razorpayPaymentId: response.razorpay_payment_id || '',
+              customer: {
+                fullName: fullName,
+                phone: phone,
+                email: email,
+                pincode: pincode,
+                state: state,
+                city: city,
+                address: address,
+                landmark: landmark,
+                notes: notes
+              },
+              items: items,
+              total: amount / 100,
+              createdAt: new Date().toISOString(),
+              paymentStatus: 'paid'
+            };
+            saveOrder(payload);
+            localStorage.removeItem('pulsepair_cart');
+            window.location.href = 'success.html?order_id=' + encodeURIComponent(orderId) + '&payment_id=' + encodeURIComponent(response.razorpay_payment_id || '');
+          },
+          prefill: {
+            name: fullName,
+            email: email,
+            contact: phone
+          },
+          theme: {
+            color: '#4b1f4e'
+          },
+          modal: {
+            ondismiss: function () {
+              if (submitBtn) {
+                submitBtn.disabled = false;
+                submitBtn.textContent = originalText;
+              }
+            }
+          }
+        };
+
+        var rz = new window.Razorpay(options);
+        rz.on('payment.failed', function () {
+          if (submitBtn) {
+            submitBtn.disabled = false;
+            submitBtn.textContent = originalText;
+          }
+          alert('Payment failed or was cancelled. Please try again.');
+        });
+        rz.open();
+      } catch (err) {
+        console.error(err);
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.textContent = originalText;
+        }
+        alert('Unable to start payment right now. Please try again.');
+      }
+    }, true);
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initSuccessOnlyCheckout);
+  } else {
+    initSuccessOnlyCheckout();
+  }
+})();
