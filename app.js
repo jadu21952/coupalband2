@@ -57,7 +57,7 @@ const PRODUCTS = [
   {
     id: 'sunmoon-luxe-necklace',
     name: 'Sun & Moon Luxe Necklace',
-    price: 3999,
+    price: 1,
     oldPrice: 11999,
     save: 8000,
     description: 'A premium Sun & Moon touch necklace set for couples who want a refined romantic look.',
