@@ -1,4 +1,79 @@
-
+const PRODUCTS = [
+  {
+    id: 'pulsepair-classic',
+    name: 'PulsePair Classic',
+    price: 2999,
+    oldPrice: 7999,
+    save: 5000,
+    description: 'A timeless pair of long-distance smart bracelets with instant vibration and soft light alerts.',
+    fullDescription: 'PulsePair Classic is designed for couples who want a simple, elegant way to stay emotionally connected. Tap your bracelet and your partner instantly feels a gentle vibration with a soft blinking light through the paired mobile app.',
+    colors: ['Midnight Black', 'Rose Gold'],
+    features: ['Instant vibration', 'Soft light blink alert', 'App connected pairing', 'Rechargeable battery', 'Gift-ready packaging'],
+    images: ['classic-front.png','classic-hand.png','classic-touch.png','classic-light.png','classic-box.png','classic-pair.png']
+  },
+  {
+    id: 'sunmoon-touch-bracelets',
+    name: 'Sun & Moon Touch Bracelets',
+    price: 2499,
+    oldPrice: 7499,
+    save: 5000,
+    description: 'A symbolic sun and moon touch bracelet set for couples who want elegant gifting and everyday connection.',
+    fullDescription: 'Sun & Moon Touch Bracelets blend a premium celestial look with the same signature long-distance touch experience. They are crafted for anniversaries, birthdays, and couples who want meaningful connection across any distance.',
+    colors: ['Gold', 'Silver'],
+    features: ['Instant vibration', 'Soft light blink alert', 'App connected pairing', 'Rechargeable battery', 'Premium celestial finish'],
+    images: ['sunmoon-front.png','sunmoon-hand.png','sunmoon-touch.png','sunmoon-light.png','sunmoon-box.png','sunmoon-pair.png']
+  },
+  {
+    id: 'heartbeat-touch-bracelets',
+    name: 'HEARTBEAT touch bracelets',
+    price: 1999,
+    oldPrice: 5999,
+    save: 4000,
+    description: 'A bold heartbeat-inspired bracelet set with a sleek darker finish and the same loving touch experience.',
+    fullDescription: 'HEARTBEAT touch bracelets are made for couples who want a private heartbeat-style connection through vibration and blinking light, wrapped in a modern premium design.',
+    colors: ['Midnight Black', 'Graphite'],
+    features: ['Instant vibration', 'Soft light blink alert', 'App connected pairing', 'Rechargeable battery', 'Sleek matte finish'],
+    images: ['heartbeat-front.png','heartbeat-hand.png','heartbeat-touch.png','heartbeat-light.png','heartbeat-box.png','heartbeat-pair.png']
+  },
+  {
+    id: 'heartsync-luxe-necklace',
+    name: 'HeartSync Luxe Necklace',
+    price: 3499,
+    oldPrice: 9999,
+    save: 6500,
+    description: 'A premium long-distance touch necklace set with a luxury heartbeat pendant design.',
+    fullDescription: 'HeartSync Luxe Necklace is designed for couples who want a more luxurious long-distance wearable. With a premium pendant design, elegant chain styling, and private connection feel, it is crafted for gifting, anniversaries, and romantic moments.',
+    colors: ['Midnight Black', 'Rose Gold'],
+    features: ['Instant vibration', 'Soft blink alert', 'Luxury chain finish', 'Gift-ready packaging', 'Long-distance touch connection'],
+    images: [
+      'heartsync-front.png',
+      'heartsync-box.png',
+      'heartsync-touch.png',
+      'heartsync-distance.png',
+      'heartsync-dinner.png',
+      'heartsync-gift.png'
+    ]
+  },
+  {
+    id: 'sunmoon-luxe-necklace',
+    name: 'Sun & Moon Luxe Necklace',
+    price: 3999,
+    oldPrice: 11999,
+    save: 8000,
+    description: 'A premium Sun & Moon touch necklace set for couples who want a refined romantic look.',
+    fullDescription: 'Sun & Moon Luxe Necklace is designed for couples who want an elegant and luxurious long-distance connection product beyond bracelets. It is ideal for special gifting, premium styling, and emotional connection.',
+    colors: ['Black Gold', 'Rose Gold'],
+    features: ['Instant touch alert', 'Soft blink light', 'Premium chain design', 'Luxury gift packaging', 'Elegant daily wear'],
+    images: [
+      'sunmoon-necklace-front.png',
+      'sunmoon-necklace-box.png',
+      'sunmoon-necklace-touch.png',
+      'sunmoon-necklace-distance.png',
+      'sunmoon-necklace-dinner.png',
+      'sunmoon-necklace-gift.png'
+    ]
+  }
+];
 const PRODUCTS = [
   {
     id: 'pulsepair-classic',
