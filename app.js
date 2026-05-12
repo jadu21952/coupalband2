@@ -37,7 +37,44 @@ const PRODUCTS = [
     images: ['heartbeat-front.png','heartbeat-hand.png','heartbeat-touch.png','heartbeat-light.png','heartbeat-box.png','heartbeat-pair.png']
   }
 ];
-
+{
+  id: 'heartsync-luxe-necklace',
+  name: 'HeartSync Luxe Necklace',
+  price: 3499,
+  oldPrice: 9999,
+  save: 6500,
+  description: 'A premium long-distance touch necklace set with a luxury heartbeat pendant design.',
+  fullDescription: 'HeartSync Luxe Necklace is designed for couples who want a more luxurious long-distance wearable. With a premium pendant design, elegant chain styling, and private connection feel, it is crafted for gifting, anniversaries, and romantic moments.',
+  colors: ['Midnight Black', 'Rose Gold'],
+  features: ['Instant vibration', 'Soft blink alert', 'Luxury chain finish', 'Gift-ready packaging', 'Long-distance touch connection'],
+  images: [
+    'heartsync-front.png',
+    'heartsync-box.png',
+    'heartsync-touch.png',
+    'heartsync-distance.png',
+    'heartsync-dinner.png',
+    'heartsync-gift.png'
+  ]
+},
+{
+  id: 'sunmoon-luxe-necklace',
+  name: 'Sun & Moon Luxe Necklace',
+  price: 3999,
+  oldPrice: 11999,
+  save: 8000,
+  description: 'A premium Sun & Moon touch necklace set for couples who want a refined romantic look.',
+  fullDescription: 'Sun & Moon Luxe Necklace is designed for couples who want an elegant and luxurious long-distance connection product beyond bracelets. It is ideal for special gifting, premium styling, and emotional connection.',
+  colors: ['Black Gold', 'Rose Gold'],
+  features: ['Instant touch alert', 'Soft blink light', 'Premium chain design', 'Luxury gift packaging', 'Elegant daily wear'],
+  images: [
+    'sunmoon-necklace-front.png',
+    'sunmoon-necklace-box.png',
+    'sunmoon-necklace-touch.png',
+    'sunmoon-necklace-distance.png',
+    'sunmoon-necklace-dinner.png',
+    'sunmoon-necklace-gift.png'
+  ]
+}
 function getCart(){ return JSON.parse(localStorage.getItem('pulsepair_cart') || '[]'); }
 function saveCart(cart){ localStorage.setItem('pulsepair_cart', JSON.stringify(cart)); updateCartBadge(); }
 function updateCartBadge(){ const total = getCart().reduce((a,b)=>a+b.quantity,0); document.querySelectorAll('#cartCountHeader').forEach(el=>el.textContent=String(total)); }
