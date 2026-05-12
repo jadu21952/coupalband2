@@ -36,7 +36,7 @@ const PRODUCTS = [
     features: ['Instant vibration', 'Soft light blink alert', 'App connected pairing', 'Rechargeable battery', 'Sleek matte finish'],
     images: ['heartbeat-front.png','heartbeat-hand.png','heartbeat-touch.png','heartbeat-light.png','heartbeat-box.png','heartbeat-pair.png']
   }
-];
+  },
 {
   id: 'heartsync-luxe-necklace',
   name: 'HeartSync Luxe Necklace',
