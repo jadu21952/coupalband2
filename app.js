@@ -306,7 +306,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
         await ensureRazorpayScript();
 
         var options = {
-          key: 'rzp_test_SmyTWYoznFPV2b',
+          key: 'rzp_live_SnyAGJqKUompfc',
           amount: amount,
           currency: 'INR',
           name: 'PulsePair',
