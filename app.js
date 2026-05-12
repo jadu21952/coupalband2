@@ -15,9 +15,9 @@ const PRODUCTS = [
   {
     id: 'sunmoon-touch-bracelets',
     name: 'Sun & Moon Touch Bracelets',
-    price: 1999,
-    oldPrice: 5999,
-    save: 4000,
+    price: 2499,
+    oldPrice: 7499,
+    save: 5000,
     description: 'A symbolic sun and moon touch bracelet set for couples who want elegant gifting and everyday connection.',
     fullDescription: 'Sun & Moon Touch Bracelets blend a premium celestial look with the same signature long-distance touch experience. They are crafted for anniversaries, birthdays, and couples who want meaningful connection across any distance.',
     colors: ['Gold', 'Silver'],
