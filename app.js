@@ -2,7 +2,7 @@ const PRODUCTS = [
   {
     id: 'pulsepair-classic',
     name: 'PulsePair Classic',
-    price: 2,
+    price: 2999,
     oldPrice: 7999,
     save: 5000,
     description: 'A timeless pair of long-distance smart bracelets with instant vibration and soft light alerts.',
